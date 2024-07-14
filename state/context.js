@@ -5,6 +5,7 @@ const GameContext = createContext();
 function GameProvider({ children }) {
   const [inputNum, setInputNum] = useState("");
   const [chosenNum, setChosenNum] = useState(null);
+  console.log(chosenNum);
   return (
     <GameContext.Provider
       value={{ inputNum, setInputNum, chosenNum, setChosenNum }}

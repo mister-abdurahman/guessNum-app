@@ -8,12 +8,17 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import PrimaryBtn from "../components/PrimaryBtn";
+import PrimaryBtn from "../components/UI/PrimaryBtn";
 import { useGameContext } from "../state/context";
+import Colors from "../constants/colors";
+import Title from "../components/UI/Title";
+import Card from "../components/UI/Card";
+import InstructionText from "../components/UI/InstructionText";
+import RootContainer from "../components/UI/RootContainer";
 
-function StartGame() {
-  //   const [inputNum, setInputNum] = useState("");
-  const { inputNum, setInputNum, setChosenNum } = useGameContext();
+function StartGame({ onChosenNum }) {
+  const [inputNum, setInputNum] = useState("");
+  //   const { inputNum, setInputNum, setChosenNum } = useGameContext();
 
   function numInputHandler(enteredText) {
     setInputNum(enteredText);
@@ -29,54 +34,47 @@ function StartGame() {
         { text: "Okay", style: "destructive", onPress: handleReset },
       ]);
     }
-    setChosenNum(inputNum);
+    // setChosenNum(inputNum);
+    onChosenNum(inputNum);
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.numberInput}
-        value={inputNum}
-        onChangeText={numInputHandler}
-        maxLength={2}
-        keyboardType="number-pad"
-      />
-      <View style={{ flexDirection: "row", marginTop: 8, gap: 6 }}>
-        <View style={{ flex: 1 }}>
-          <PrimaryBtn onClick={handleReset}>Reset</PrimaryBtn>
+    <RootContainer>
+      {/* <View style={{ alignItems: "center" }}> */}
+      <Title>Guess my Number</Title>
+      {/* </View> */}
+      <Card>
+        <InstructionText>Enter a Number</InstructionText>
+        <TextInput
+          style={styles.numberInput}
+          value={inputNum}
+          onChangeText={numInputHandler}
+          maxLength={2}
+          keyboardType="number-pad"
+        />
+        <View style={{ flexDirection: "row", marginTop: 8, gap: 6 }}>
+          <View style={{ flex: 1 }}>
+            <PrimaryBtn onClick={handleReset}>Reset</PrimaryBtn>
+          </View>
+          <View style={{ flex: 1 }}>
+            <PrimaryBtn onClick={handleConfirm}>Confirm</PrimaryBtn>
+          </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <PrimaryBtn onClick={handleConfirm}>Confirm</PrimaryBtn>
-        </View>
-      </View>
-    </View>
+      </Card>
+    </RootContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    marginTop: 100,
-    backgroundColor: "#3b021f",
-    borderRadius: 8,
-    marginHorizontal: 20,
-    elevation: 8, //android.only
-    shadowColor: "black", //IOS.only
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   numberInput: {
     height: 50,
     width: 50,
     marginHorizontal: "auto",
     textAlign: "center",
     fontSize: 32,
-    borderBottomColor: "#ddb52f",
+    borderBottomColor: Colors.accent500,
     borderBottomWidth: 2,
-    color: "#ddb52f",
+    color: Colors.accent500,
     marginVertical: 8,
   },
 });
