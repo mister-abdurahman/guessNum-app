@@ -7,6 +7,7 @@ import {
   Button,
   Pressable,
   Alert,
+  Dimensions,
 } from "react-native";
 import PrimaryBtn from "../components/UI/PrimaryBtn";
 import { useGameContext } from "../state/context";
@@ -65,10 +66,12 @@ function StartGame({ onChosenNum }) {
   );
 }
 
+const deviceWidth = Dimensions.get("window").width; //360 for samsung S8
+
 const styles = StyleSheet.create({
   numberInput: {
     height: 50,
-    width: 50,
+    width: deviceWidth < 360 ? 30 : 50,
     marginHorizontal: "auto",
     textAlign: "center",
     fontSize: 32,

@@ -113,6 +113,9 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
+    width: "100%",
+    marginTop: 12,
+    paddingHorizontal: 14,
     // height: "100%",
   },
 });
